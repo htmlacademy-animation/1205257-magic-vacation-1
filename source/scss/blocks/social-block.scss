@@ -17,6 +17,7 @@
   height: 4rem;
   color: $c-dark;
   border-radius: 50%;
+  transition: color 0.15s ease 0.3s;
 
   @media (max-width: $tablet) and (orientation: portrait) {
     display: none;
@@ -35,6 +36,11 @@
     background-color: $c-light;
     border: 2px solid $c-light;
     z-index: -1;
+    transition:
+      width 0.3s ease,
+      height 0.3s ease,
+      border-color 0.2s ease 0.35s,
+      background-color 0.2s ease 0.35s;
   }
 
   svg {
@@ -45,23 +51,25 @@
   }
 
   &:hover,
-  .social-block--active & {
-    color: $c-purple;
-
+  &:focus {
     &::before {
       width: 112.5%;
       height: 112.5%;
     }
   }
 
-  &:focus {
-    color: $c-purple;
-    outline: none;
+  &:hover,
+  &:focus,
+  .social-block--active & {
+    color: $c-light;
 
     &::before {
       border-color: $c-purple;
+      background-color: $c-purple;
     }
+  }
 
+  &:focus {
     & + .social-block__list {
       opacity: 1;
       pointer-events: auto;
@@ -127,16 +135,8 @@
     }
   }
 
-  &:hover {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  &:focus-within {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
+  &:hover,
+  &:focus-within,
   .social-block--active & {
     opacity: 1;
     pointer-events: auto;
@@ -168,6 +168,7 @@
   color: $c-light;
   border: 2px solid transparent;
   border-radius: 50%;
+  opacity: 0;
 
   @media (min-width: $stop-scaling) {
     width: 40px;
@@ -202,11 +203,26 @@
     border-color: $c-light;
   }
 
+  .social-block--active &,
+  .social-block__list:focus-within &,
+  .social-block__toggler:focus + .social-block__list & {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   svg {
     @include center;
   }
 
   &--fb {
+    transform: translateY(1.7rem);
+    transition:
+      color 0.3s ease,
+      border-color 0.3s ease,
+      background-color 0.3s ease,
+      opacity 0.3s ease-in,
+      transform 0.15s ease-in;
+
     svg {
       width: 0.8rem;
       height: 1.7rem;
@@ -219,6 +235,14 @@
   }
 
   &--insta {
+    transform: translateY(1.5rem);
+    transition:
+      color 0.3s ease,
+      border-color 0.3s ease,
+      background-color 0.3s ease,
+      opacity 0.3s ease-in 0.1s,
+      transform 0.15s ease-in 0.1s;
+
     svg {
       width: 1.5rem;
       height: 1.5rem;
@@ -231,6 +255,14 @@
   }
 
   &--vk {
+    transform: translateY(1rem);
+    transition:
+      color 0.3s ease,
+      border-color 0.3s ease,
+      background-color 0.3s ease,
+      opacity 0.3s ease-in 0.2s,
+      transform 0.15s ease-in 0.2s;
+
     svg {
       width: 1.7rem;
       height: 1rem;
